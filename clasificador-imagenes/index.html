@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f1f5f9">
+  <title>Clasificador inteligente de imágenes</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <main class="contenedor">
+    <header>
+      <p class="etiqueta">INTELIGENCIA ARTIFICIAL</p>
+      <h1>Clasificador de imágenes</h1>
+      <p>Analiza imágenes con tu modelo de inteligencia artificial.</p>
+    </header>
+
+    <p id="estado" class="estado" role="status" aria-live="polite">Preparado. Carga tu modelo para comenzar.</p>
+
+    <section class="panel" aria-labelledby="tituloCamara">
+      <h2 id="tituloCamara">Cámara</h2>
+      <p>Inicia la cámara para clasificar imágenes en tiempo real.</p>
+      <div class="botones">
+        <button id="iniciar" type="button">Iniciar cámara</button>
+        <button id="detener" type="button" class="boton-secundario" disabled>Detener cámara</button>
+      </div>
+      <div id="camara" class="visor" aria-label="Vista de la cámara">
+        <p>La vista de la cámara aparecerá aquí.</p>
+      </div>
+    </section>
+
+    <section class="panel" aria-labelledby="tituloConfiguracion">
+      <h2 id="tituloConfiguracion">Configuración</h2>
+      <label for="umbral">Umbral mínimo de confianza: <output id="valorUmbral" for="umbral">70%</output></label>
+      <input id="umbral" type="range" min="0" max="100" value="70">
+      <label for="mensajePersonalizado">Mensaje cuando hay coincidencia</label>
+      <input id="mensajePersonalizado" type="text" maxlength="120" placeholder="Ej.: ¡Objeto identificado!">
+    </section>
+
+    <section class="panel" aria-labelledby="tituloImagen">
+      <h2 id="tituloImagen">Clasificar una imagen</h2>
+      <label for="archivo">Selecciona una imagen</label>
+      <input id="archivo" type="file" accept="image/*">
+      <img id="imagenSubida" alt="Vista previa de la imagen seleccionada" hidden>
+      <div class="botones">
+        <button id="clasificarArchivo" type="button" disabled>Clasificar imagen</button>
+      </div>
+      <p id="resultadoArchivo" class="texto-secundario" role="status" aria-live="polite"></p>
+    </section>
+
+    <section class="panel" aria-labelledby="tituloResultados">
+      <h2 id="tituloResultados">Resultados</h2>
+      <div id="resultados" aria-live="polite">
+        <p class="texto-secundario">Las probabilidades aparecerán aquí.</p>
+      </div>
+      <p id="mensaje" role="status" aria-live="polite"></p>
+    </section>
+
+    <section class="panel" aria-labelledby="tituloHistorico">
+      <div class="encabezado-historico">
+        <h2 id="tituloHistorico">Histórico</h2>
+        <button id="limpiar" type="button" class="boton-secundario">Borrar histórico</button>
+      </div>
+      <ol id="historico"></ol>
+      <p id="historicoVacio" class="texto-secundario">Todavía no hay clasificaciones guardadas.</p>
+    </section>
+
+    <footer>
+      <p>La cámara requiere permiso y una conexión segura o un servidor local (por ejemplo, Live Server).</p>
+    </footer>
+  </main>
+</body>
+</html>
